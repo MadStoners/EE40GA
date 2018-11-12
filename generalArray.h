@@ -2,7 +2,7 @@
 #define __GENERALARRAY_H_
 
 
-#include "arrayItem.h"
+#include "ArrayItem.h"
 
 
 
@@ -98,7 +98,7 @@ protected:
 		//	delete reference_item;
 	}
 
-	//  ---- following functions give direct acees to elemt pointers: use for advanced stuff only ---- 
+	//  ---- following functions give direct acees to element pointers: use for advanced stuff only ----
 	// gives direct access an element: only to be used by memeber functions;
 	// It leaves the element in the array.
 	// [ this is useful for the bubblesort (and mergesort) ]
@@ -133,7 +133,7 @@ protected:
 		if(memIsAllocated() && checkIndexIsAllowed(index) )
 		{
 			// add the item if array element is not occupied already
-			if( (thearray[index]==NULL) )
+			if( thearray[index]==NULL )
 			{
 				if( (item_ptr!=NULL) )
 				{
@@ -288,6 +288,10 @@ public:
 			}
 		}		
 	}
+    
+    
+    
+    
 	// input functions
 	void enterArrayFromKeyboard()
 	{
@@ -343,13 +347,13 @@ public:
 
 		// note: sort_criteria_ptr is an optional paramteter (default is null)
 		// when present, this can be used to determine the sorting type:
-		// example 1: "ascending" or "discending" for simple items that hold numbers or strings
+		// example 1: "ascending" or "descending" for simple items that hold numbers or strings
 		// example 2: "sort by name" or "sort by student ID" for complex items that hold both names and numbers 
 
 		
 		// To be completed by students:
 		// The version below produces the correct result but performs some unnecessary comparisons.
-		// Modify it so that it becomes smore efficient
+		// Modify it so that it becomes more efficient
 		
 		for(int loop_index=0; loop_index<getMaxSize()-1; loop_index++)
 		{

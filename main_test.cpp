@@ -1,5 +1,5 @@
 
-#include "arrayItem.h"
+#include "ArrayItem.h"
 #include "generalArray.h"
 
 
@@ -8,20 +8,30 @@
 
 void test_array(int array_size, basic_item* ref_item)
 {
-	basic_sort_criteria srt_crt(true);
-	general_array test_array;	
-	// attach the "integer item" as referecen item
+	basic_sort_criteria srt_crt;
+	general_array test_array;
+    integer_item test_item;
+    bool key;
+    // attach the "integer item" as reference item
 	test_array.attachRefrenceItem(ref_item);
 	// now allocate the array	
 	test_array.allocateArray(array_size);
 	// print content to screen (empty)
 	cout << " Array is empty at this time." << endl << endl;
 	test_array.printArrayOnScreen();
-	// fill with random items
-	cout << endl << " Filling Array with random values." << endl;
-	test_array.fillRandomValueArray();
+    // Fill array with values from the keyboard
+    cout << "Please manually fill the array" << endl << endl;
+    test_array.enterArrayFromKeyboard();
+	
+    // fill with random items
+	/*cout << endl << " Filling Array with random values." << endl;
+	test_array.fillRandomValueArray();*/
+    
 	// print content to screen
-	test_array.printArrayOnScreen();
+    test_array.printArrayOnScreen();
+    cout << "Sort the order of the array to: 0 - Ascending or 1 - Descending" << endl;
+    cin >> key;
+    srt_crt.setAscending(key);
 	// sort the array 
 	cout << endl << " Sorting Array." << endl;
 	test_array.bubblesort(&srt_crt);
@@ -30,7 +40,7 @@ void test_array(int array_size, basic_item* ref_item)
 }
 
 
-void main()
+int main()
 {
 	int array_size = 10;
 	int temp;	
@@ -38,14 +48,16 @@ void main()
 	integer_item ref_int_item;
 	// Used as "example item" by the general_array to populate the entire array with neg_int_item 
 	neg_int_item ref_nint_item;
-	// First test with the inger item
-	cout << " Testing array with integer (positve and negative) items: " << endl << endl;
+	// First test with the integer item
+	cout << "Testing array with integer (positve and negative) items: " << endl << endl;
 	test_array(array_size, &ref_int_item);
-	cout << " Done. Enter any nymber to progress to the next test." << endl;
+    cout << "Compiled" << endl;
+    cout << "Done. Enter any number to progress to the next test." << endl;
 	cin>>temp;
 	// Next test with the negative ingteger item
-	cout << " Testing array with NEGATIVE ONLY integer items: " << endl << endl;
+	cout << "Testing array with NEGATIVE ONLY integer items: " << endl << endl;
 	test_array(array_size, &ref_nint_item);
-	cout << " Done. Enter any nymber to finish." << endl;
+	cout << "Done. Enter any number to finish." << endl;
 	cin>>temp;
+return 0;
 }

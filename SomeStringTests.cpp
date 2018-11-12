@@ -4,8 +4,6 @@
 
 // to use ostringstream:
 #include <sstream>
-
-
 // to use ofstream
 #include <fstream>
 
@@ -81,8 +79,8 @@ void stringtestmain()
 
 	//// IO to/form file
 	
-	// with the "empty" basedirectory the file should be where the source files are 
-	string basedir="";
+	// with the "empty" basedirectory the file should be where the source files are
+	string basedir="/Users/dylanquirie/Documents/firstNames.csv ";
 
 	// otherwise put a full path here (use \\ instead of \ )
 	//string basedir="H:\\fverdiccABDN\\UniABDN\\MyCourses\\EG40GA\\LectureNoteRepository\\EE40GA_Sort\\IOfiles\\";
@@ -142,8 +140,8 @@ void stringtestmain()
 	/////////
 
 
-	// this can convert numbers to strings (may not be eeded after all)
-	int inpnum; 
+	// this can convert numbers to strings (may not be needed after all)
+	//int inpnum; 
 	string s4;
 	ostringstream theconverter;
 	//cout << "Enter number: "<< endl;
