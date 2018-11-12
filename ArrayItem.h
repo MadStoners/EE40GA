@@ -20,20 +20,25 @@ template <class Base, class Derived> Derived* typecastItem(Base* basic_ptr, Deri
 //////
 
 
-// this is the base version of an object that holds the information about sorting ctiteria.
-// for simple array items: the options "ascending/descending" affred here suffice.
-// For more complex/composite array items: an appropriate sort criteria should be deirved from 
-// this base class and used in "IsLargerThan" 
+/* this is the base version of an object that holds the information about sorting ctiteria.
+
+    for simple array items: the options "ascending/descending" affred here suffice.
+ 
+    For more complex/composite array items: an appropriate sort criteria should be deirved from
+ 
+    this base class and used in "IsLargerThan" */
 class basic_sort_criteria{
 protected:
 	bool ascending;
-	void basic_initialization(){setAscending(true);}
+	void basic_initialization(){setAscending(true);} //This initialises to ascending automatically
 public:
-	basic_sort_criteria(){basic_initialization();}
-	basic_sort_criteria(bool value){setAscending(value);}
-	void setAscending(bool value){ascending=value;}
+	basic_sort_criteria(){basic_initialization();} // Class constructor
+	basic_sort_criteria(bool value){setAscending(value);} // Constructor with value
+	void setAscending(bool value){ascending=value;} // 
 	bool getAscending(){return ascending;}	
 };
+
+
 
 
 
@@ -47,16 +52,21 @@ public:
 	
 	bool isEmpty(){return empty;}
 	
-	//The following must be implemented by any derived item:	
-
-
+	//The following must be implemented by any derived item:
 	virtual void printItemOnScreen()=0;
 	virtual void enterItemFromKeyboard()=0;
-	//virtual void loadItemFromFile(FILE* fin)=0;
 	virtual void generateRandomItem()=0;
+    
+    
+    
+    /* To Be implamented */
+    // virtual void loadItemFromFile(FILE* fin)=0;
 	
-	// Needed for sorting; the second paratmer holds the information about soritng ctireria;
-	// If you do not supply a second parameter, a default option (simple ascending sorting) is assumed 
+    
+    
+	/* Needed for sorting; the second paratmer holds the information about soritng ctireria;
+     If you do not supply a second parameter, a default option (simple ascending sorting) is assumed
+    */
 	virtual bool IsLargerThan(basic_item* other_item, basic_sort_criteria* sort_criteria=NULL)=0;
 
 	virtual basic_item* allocateItem()=0;
@@ -64,7 +74,6 @@ public:
 	//virtual basic_item* makeCopyofItem()=0;
 
 };
-
 // Example of derived class implementing an integer item
 class integer_item: public basic_item{
 protected:
@@ -113,7 +122,10 @@ public:
 		
 	}
 	
-	//virtual void loadItemFromFile(FILE* fin);
+    virtual void loadItemFromFile(FILE* fin)
+    {
+        
+    }
 	
 	virtual bool IsLargerThan(basic_item* other_item, basic_sort_criteria* sort_criteria=NULL)
 	{
