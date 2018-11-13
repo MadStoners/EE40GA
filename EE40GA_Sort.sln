@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "EE40GA_Sort", "EE40GA_Sort\EE40GA_Sort.vcxproj", "{1680A9D3-6A57-440D-B25C-C65B491DE8F2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1680A9D3-6A57-440D-B25C-C65B491DE8F2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1680A9D3-6A57-440D-B25C-C65B491DE8F2}.Debug|Win32.Build.0 = Debug|Win32
+		{1680A9D3-6A57-440D-B25C-C65B491DE8F2}.Release|Win32.ActiveCfg = Release|Win32
+		{1680A9D3-6A57-440D-B25C-C65B491DE8F2}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
