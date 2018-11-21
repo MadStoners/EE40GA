@@ -280,9 +280,93 @@ public:
     }
 };
 
-//class arrayElement: public basic_item
-//{
-
+class arrayElement: public basic_item{
+protected:
+    firstNameItem first_name;
+    
+public:
+    // default constructor and destructor: do nothing
+    arrayElement(){;}
+    ~arrayElement(){;}
+    
+    string getArrayElement(){string bob=first_name.getStringVal();return bob;}
+    
+    // This function is used to print the array on screen
+    virtual void printItemOnScreen()
+    {
+        first_name.printItemOnScreen();
+    }
+    
+    // This function is used to enter the array from the keyboard
+    virtual void enterItemFromKeyboard()
+    {
+        first_name.enterItemFromKeyboard();
+    }
+    
+    // This function is used to generate the array from random values
+    virtual void generateRandomItem()
+    {
+        first_name.generateRandomItem();
+    }
+    
+    // Function is used to check the items for sorting the array
+    virtual bool IsLargerThan(basic_item* other_item, basic_sort_criteria* sort_criteria=NULL)
+    {
+        bool result=false;
+        // if the other item is "empty" (non allocated) don't do any comparison
+        if(other_item==NULL)
+            return false;
+        
+        // first typecast the other item to confimr it is the same as this;
+        arrayElement* typecasted_other_item = typecastItem(other_item, this);
+        
+        // check that it worked
+        if(typecasted_other_item==NULL)
+        {
+            cout << "Other item is not of type integer_item." << endl;
+            return false;
+            // items of the wrong type (or null pointers) will be pushed to the end of the list
+        }
+        
+        // now verify if the other item is larger than the curren
+        if( getArrayElement() > (typecasted_other_item->getArrayElement()) )
+            result=true;
+        
+        
+        // chek if there are sorting options to apply
+        if(sort_criteria!=NULL)
+        {
+            // if sorting is in descending order the result is reversed
+            if( !( sort_criteria->getAscending() ) )
+                result=!result;
+        }
+        
+        return result;
+    }
+    
+    // Function is used to release the memory
+    virtual void deallocateItem(basic_item* item_ptr)
+    {
+        // first typecast the other item to confimr it is the same as this;
+        arrayElement* typecasted_item_ptr = typecastItem(item_ptr, this);
+        
+        // check that it worked
+        if(typecasted_item_ptr==NULL)
+        {
+            // items of the wrong type (or null pointers)
+            cout << "Error in deallocateItem (for firstNameItem): "<< endl << "Other item is not of type firstNameItem." << endl;
+            return;
+        }
+        delete typecasted_item_ptr;
+    }
+    virtual basic_item* allocateItem()
+    {
+        arrayElement* result = new arrayElement;
+        if(result==NULL)
+            cout << " Error in firstNameItem::allocateItem(): out of memory"<< endl;
+        return result;
+    }
+};
 
 
 

@@ -48,7 +48,7 @@ int main()
 	int temp;	
 	// Used as "example item" by the general_array to populate the entire array with integer_item 
 	//integer_item ref_int_item;
-    firstNameItem refStringItem;
+    arrayElement refArrayElement;
 	// Used as "example item" by the general_array to populate the entire array with neg_int_item 
     // neg_int_item ref_nint_item;
 	// First test with the integer item
@@ -58,7 +58,7 @@ int main()
 	//cin>>temp;
     
     cout << "Testing array with string items: " << endl << endl;
-    test_array(array_size, &refStringItem);
+    test_array(array_size, &refArrayElement);
     cout << "Done. Enter any number to progress to the next test." << endl;
     cin>>temp;
     
