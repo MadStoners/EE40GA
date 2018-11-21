@@ -3,7 +3,7 @@
 
 #include <iostream>
 using namespace std;
-
+#include <string>
 #include "stdlib.h" 
 #include "time.h" 
 
@@ -50,28 +50,22 @@ public:
 	basic_item(){empty=true;}
 	~basic_item(){;}
 	
-	bool isEmpty(){return empty;}
+	bool isEmpty(){return empty;} // Function called to check if the array is empty
 	
 	//The following must be implemented by any derived item:
-	virtual void printItemOnScreen()=0;
+	virtual void printItemOnScreen()=0; 
 	virtual void enterItemFromKeyboard()=0;
 	virtual void generateRandomItem()=0;
-    
-    
-    
-    /* To Be implamented */
     // virtual void loadItemFromFile(FILE* fin)=0;
 	
     
     
-	/* Needed for sorting; the second paratmer holds the information about soritng ctireria;
-     If you do not supply a second parameter, a default option (simple ascending sorting) is assumed
-    */
+	/* Needed for sorting; the second parameter holds the information about soritng ctireria;
+     If you do not supply a second parameter, a default option (simple ascending sorting) is assumed */
 	virtual bool IsLargerThan(basic_item* other_item, basic_sort_criteria* sort_criteria=NULL)=0;
-
 	virtual basic_item* allocateItem()=0;
 	virtual void deallocateItem(basic_item* item_ptr)=0;
-	//virtual basic_item* makeCopyofItem()=0;
+    // virtual basic_item* makeCopyofItem()=0;
 
 };
 // Example of derived class implementing an integer item
@@ -85,7 +79,8 @@ public:
 	~integer_item(){;}
 
 	int getItemVal(){return item_value;}
-	
+    
+    // This function is used to print the array on screen
 	virtual void printItemOnScreen()
 	{
 		if(isEmpty())
@@ -93,7 +88,8 @@ public:
 		else
 			cout << "Item value is " << getItemVal() << " . " << endl;
 	}
-
+    
+    // This function is used to enter the array from the keyboard
 	virtual void enterItemFromKeyboard()
 	{
 		cout << "Insert element then hit enter." << endl;
@@ -104,6 +100,7 @@ public:
 		empty=false;
 	}
 
+    // This function is used to generate the array from random values
 	virtual void generateRandomItem()
 	{
 		int item;
@@ -121,12 +118,8 @@ public:
 		empty=false;
 		
 	}
-	
-    virtual void loadItemFromFile(FILE* fin)
-    {
-        
-    }
-	
+
+    // Function is used to check the items for sorting the array
 	virtual bool IsLargerThan(basic_item* other_item, basic_sort_criteria* sort_criteria=NULL)
 	{
 		bool result=false;
@@ -161,6 +154,7 @@ public:
 		return result;
 	}
 
+    // Function is used to release the memory
 	virtual void deallocateItem(basic_item* item_ptr)
 	{
 		// first typecast the other item to confimr it is the same as this;
@@ -184,61 +178,111 @@ public:
 	}
 };
 
-
-// This object only accepts negative elements; it is readily derived from integer_item 
-// by implementing only a few functions (all others are inhereited from the parent).
-class neg_int_item: public integer_item{
+// Deriving own first name class
+class firstNameItem: public basic_item{
+protected:
+    string firstName;
+    
 public:
-	// We must implement the following two functions to allocate/free neg_int_item differently from integer_item
-	virtual void deallocateItem(basic_item* item_ptr)
-	{
-		// first typecast the other item to confimr it is the same as this;
-		neg_int_item* typecasted_item_ptr = typecastItem(item_ptr, this);
-		
-		// check that it worked
-		if(typecasted_item_ptr==NULL)
-		{
-			// items of the wrong type (or null pointers)
-			cout << "Error in deallocateItem (for neg_int_item): "<< endl << "Other item is not of type integer_item." << endl;
-			return;
-		}
-		delete typecasted_item_ptr;
-	}
-	virtual basic_item* allocateItem()
-	{
-		neg_int_item* result = new neg_int_item;
-		if(result==NULL)
-			cout << " Error in neg_int_item::allocateItem(): out of memory"<< endl;
-		return result;
-	}
-	//---------------------------------------------------------------------------------------//
-	// We implement the following two functions to fill neg_int_item differently from integer_item
-	virtual void enterItemFromKeyboard()
-	{
-		//warn the user:
-		cout << "Insertion of neg_int_item: element value must be negative." << endl;
-		// loop till you get a negative input number
-		while(empty)
-		{
-			//call the parent funciton to fill the object
-			integer_item::enterItemFromKeyboard();
-			if(getItemVal()>=0)
-				empty=true;
-		}
-	}
-	virtual void generateRandomItem()
-	{
-		// loop till you get a negative random number
-		while(empty)
-		{
-			//call the parent funciton to fill the object
-			integer_item::generateRandomItem();
-			if(getItemVal()>=0)
-				empty=true;
-		}
-	}
-
+    // default constructor and destructor: do nothing
+    firstNameItem(){;}
+    ~firstNameItem(){;}
+    
+    string getStringVal(){return firstName;}
+    
+    // This function is used to print the array on screen
+    virtual void printItemOnScreen()
+    {
+        if(isEmpty())
+            cout << "Item is empty." << endl;
+        else
+            cout << "Item value is " << getStringVal() << " . " << endl;
+    }
+    
+    // This function is used to enter the array from the keyboard
+    virtual void enterItemFromKeyboard()
+    {
+        cout << "Insert element then hit enter." << endl;
+        cin >> firstName;
+        cout << endl;
+        
+        // item filled
+        empty=false;
+    }
+    
+    // This function is used to generate the array from random values
+    virtual void generateRandomItem()
+    {
+        int index;
+        string first_name[10]={"Dylan","Calum","Matthew","Callum","Niko","Francis","Jack","Jan","Trev","Jaseh"};
+        index = rand() % 10;
+        firstName = first_name[index];
+        empty=false;
+        
+    }
+    
+    // Function is used to check the items for sorting the array
+    virtual bool IsLargerThan(basic_item* other_item, basic_sort_criteria* sort_criteria=NULL)
+    {
+        bool result=false;
+        // if the other item is "empty" (non allocated) don't do any comparison
+        if(other_item==NULL)
+            return false;
+        
+        // first typecast the other item to confimr it is the same as this;
+        firstNameItem* typecasted_other_item = typecastItem(other_item, this);
+        
+        // check that it worked
+        if(typecasted_other_item==NULL)
+        {
+            cout << "Other item is not of type integer_item." << endl;
+            return false;
+            // items of the wrong type (or null pointers) will be pushed to the end of the list
+        }
+        
+        // now verify if the other item is larger than the curren
+        if( getStringVal() > (typecasted_other_item->getStringVal()) )
+            result=true;
+        
+        
+        // chek if there are sorting options to apply
+        if(sort_criteria!=NULL)
+        {
+            // if sorting is in descending order the result is reversed
+            if( !( sort_criteria->getAscending() ) )
+                result=!result;
+        }
+        
+        return result;
+    }
+    
+    // Function is used to release the memory
+    virtual void deallocateItem(basic_item* item_ptr)
+    {
+        // first typecast the other item to confimr it is the same as this;
+        firstNameItem* typecasted_item_ptr = typecastItem(item_ptr, this);
+        
+        // check that it worked
+        if(typecasted_item_ptr==NULL)
+        {
+            // items of the wrong type (or null pointers)
+            cout << "Error in deallocateItem (for firstNameItem): "<< endl << "Other item is not of type firstNameItem." << endl;
+            return;
+        }
+        delete typecasted_item_ptr;
+    }
+    virtual basic_item* allocateItem()
+    {
+        firstNameItem* result = new firstNameItem;
+        if(result==NULL)
+            cout << " Error in firstNameItem::allocateItem(): out of memory"<< endl;
+        return result;
+    }
 };
+
+//class arrayElement: public basic_item
+//{
+
 
 
 

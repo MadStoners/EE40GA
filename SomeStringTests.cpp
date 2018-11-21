@@ -73,14 +73,14 @@ void stringtestmain()
 
 	
 	// example of a string created inside a function and returned
-	//string anotherstring=stringtestfunc();
-	//cout << anotherstring << endl;
+	// string anotherstring=stringtestfunc();
+	// cout << anotherstring << endl;
 
 
 	//// IO to/form file
 	
 	// with the "empty" basedirectory the file should be where the source files are
-	string basedir="/Users/dylanquirie/Documents/firstNames.csv ";
+	string basedir="//Users//dylanquirie//Documents//GitHub//EE40GA//IOFiles//firstNames.csv ";
 
 	// otherwise put a full path here (use \\ instead of \ )
 	//string basedir="H:\\fverdiccABDN\\UniABDN\\MyCourses\\EG40GA\\LectureNoteRepository\\EE40GA_Sort\\IOfiles\\";
