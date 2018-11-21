@@ -20,12 +20,12 @@ void test_array(int array_size, basic_item* ref_item)
 	cout << " Array is empty at this time." << endl << endl;
 	test_array.printArrayOnScreen();
     // Fill array with values from the keyboard
-    cout << "Please manually fill the array" << endl << endl;
-    test_array.enterArrayFromKeyboard();
+    /*cout << "Please manually fill the array" << endl << endl;
+    test_array.enterArrayFromKeyboard();*/
 	
     // fill with random items
-	/*cout << endl << " Filling Array with random values." << endl;
-	test_array.fillRandomValueArray();*/
+	cout << endl << " Filling Array with random values." << endl;
+	test_array.fillRandomValueArray();
     
 	// print content to screen
     test_array.printArrayOnScreen();
@@ -45,19 +45,13 @@ int main()
 	int array_size = 10;
 	int temp;	
 	// Used as "example item" by the general_array to populate the entire array with integer_item 
-	integer_item ref_int_item;
-	// Used as "example item" by the general_array to populate the entire array with neg_int_item 
-	neg_int_item ref_nint_item;
+	studentNumberItem refSNItem;
+
 	// First test with the integer item
 	cout << "Testing array with integer (positve and negative) items: " << endl << endl;
-	test_array(array_size, &ref_int_item);
+	test_array(array_size, &refSNItem);
     cout << "Compiled" << endl;
     cout << "Done. Enter any number to progress to the next test." << endl;
-	cin>>temp;
-	// Next test with the negative ingteger item
-	cout << "Testing array with NEGATIVE ONLY integer items: " << endl << endl;
-	test_array(array_size, &ref_nint_item);
-	cout << "Done. Enter any number to finish." << endl;
 	cin>>temp;
 return 0;
 }
