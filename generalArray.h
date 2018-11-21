@@ -23,7 +23,6 @@ protected:
 	// number of array entries allocated
 	int max_arraysize;
 	bool memallocated;
-
 	// number of array entries used
 	int tot_items;
 	
@@ -316,6 +315,7 @@ public:
 			}
 		}		
 	}
+
 	void fillRandomValueArray()
 	{
 		if( memIsAllocated() && (getTotItems()>0) )
